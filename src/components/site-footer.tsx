@@ -2,7 +2,7 @@ import { ThemeToggle } from "./theme-toggle";
 
 export async function SiteFooter() {
   return (
-    <footer className="w-full pb-4">
+    <footer className="w-full py-4">
       <div className="container flex items-center h-10">
         <div className="flex items-center gap-1 font-semibold text-sm">
           Built by hnkhandev
