@@ -30,7 +30,7 @@ export function Task() {
   return (
     <div className="w-full max-w-md flex flex-col gap-4">
       {tasks.map((task) => (
-        <Card className=" text-sm">
+        <Card className=" text-sm" key={task.id}>
           <CardHeader>
             <div className="flex justify-between items-center">
               <CardTitle>Task #1</CardTitle>
