@@ -3,6 +3,7 @@
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { Task } from "./task";
+import { motion } from "framer-motion";
 
 export function RadialTaskBar() {
   const [tasks, setTasks] = useState<Task[]>([
@@ -26,17 +27,24 @@ export function RadialTaskBar() {
           const offset = i * segmentLength + gapLength / 2; // Shift each segment by half of the gap's angular size
 
           return (
-            <circle
+            <motion.circle
               key={task.id}
-              strokeWidth="8"
+              initial={{ strokeDasharray: `0 ${totalLength}`, opacity: 0 }}
+              animate={{
+                strokeDasharray: `${actualSegmentLength} ${
+                  totalLength - actualSegmentLength
+                }`,
+                opacity: 1,
+              }}
+              transition={{
+                duration: 0.8,
+              }}
               fill="transparent"
               r="48"
               cx="60"
               cy="60"
               strokeLinecap="round"
-              strokeDasharray={`${actualSegmentLength} ${
-                totalLength - actualSegmentLength
-              }`}
+              strokeWidth={8}
               strokeDashoffset={-offset}
               transform="rotate(-90 60 60)"
               className={cn(
@@ -45,7 +53,12 @@ export function RadialTaskBar() {
             />
           );
         })}
-        <text
+        <motion.text
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{
+            duration: 0.8,
+          }}
           x="50%"
           y="50%"
           textAnchor="middle"
@@ -53,7 +66,7 @@ export function RadialTaskBar() {
           className="fill-foreground"
         >
           {`${tasks.filter((task) => task.completed).length}/5`}
-        </text>
+        </motion.text>
       </svg>
     </div>
   );
