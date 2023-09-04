@@ -22,7 +22,7 @@ export function WhopProvider({
     clientId,
     clientSecret,
     allowDangerousEmailAccountLinking: true,
-    callbackUrl: "https://gratitude-mauve.vercel.app/api/auth/callback/whop",
+    checks: ["none"],
     profile(profile: Profile) {
       return {
         id: profile.id,
