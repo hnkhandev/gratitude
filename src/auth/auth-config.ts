@@ -16,6 +16,9 @@ export const authConfig: NextAuthOptions = {
       session.user.id = user.id as string;
       return session;
     },
+    redirect({ url, baseUrl }) {
+      return baseUrl;
+    },
   },
   session: {
     strategy: "database",

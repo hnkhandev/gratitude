@@ -22,7 +22,6 @@ export function WhopProvider({
     clientId,
     clientSecret,
     allowDangerousEmailAccountLinking: true,
-    checks: ["none"] as any,
     profile(profile: Profile) {
       return {
         id: profile.id,
