@@ -17,9 +17,9 @@ export default async function SignIn() {
           <CardTitle className="">Welcome back!</CardTitle>
           <CardContent className="flex flex-col gap-2 p-0 text-sm">
             <div>
-              If you've bought&nbsp;
+              If you&apos;ve bought&nbsp;
               <span className="font-semibold text-primary">Gratitude</span>
-              access through&nbsp;
+              &nbsp;access through&nbsp;
               <span className="font-semibold text-whop">Whop</span>, sign in to
               start your journey of thanks.
             </div>
