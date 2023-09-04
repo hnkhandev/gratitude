@@ -29,7 +29,7 @@ export function Task() {
     { id: "fifth", completed: false, description: "" },
   ]);
   return (
-    <ul className="w-full max-w-md flex flex-col gap-4">
+    <ul className="flex flex-col w-full max-w-md gap-4">
       <AnimatePresence>
         {tasks.map((task, index) => (
           <motion.li
@@ -44,12 +44,12 @@ export function Task() {
               delay: index * 0.1, // stagger delay for each item
             }}
           >
-            <Card className=" text-sm">
+            <Card className="text-sm">
               <CardHeader>
-                <div className="flex justify-between items-center">
+                <div className="flex items-center justify-between">
                   <CardTitle>Task #1</CardTitle>
-                  <Button variant="ghost" className="p-2 h-auto">
-                    <ArrowRightIcon className="h-4 w-4" />
+                  <Button variant="ghost" className="h-auto p-2">
+                    <ArrowRightIcon className="w-4 h-4" />
                   </Button>
                 </div>
                 <CardDescription>Card Description</CardDescription>

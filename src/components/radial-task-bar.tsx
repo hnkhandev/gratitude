@@ -16,7 +16,7 @@ export function RadialTaskBar() {
   return (
     <div className="relative w-full max-w-md h-52">
       <svg
-        className="absolute top-0 left-0 h-full w-full"
+        className="absolute top-0 left-0 w-full h-full"
         viewBox="0 0 120 120"
       >
         {tasks.map((task, i) => {
