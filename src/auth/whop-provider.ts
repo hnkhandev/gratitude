@@ -22,6 +22,7 @@ export function WhopProvider({
     clientId,
     clientSecret,
     allowDangerousEmailAccountLinking: true,
+    callbackUrl: "/api/auth/callback/whop",
     profile(profile: Profile) {
       return {
         id: profile.id,
