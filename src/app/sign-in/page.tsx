@@ -27,7 +27,6 @@ export default async function SignIn() {
           </CardContent>
         </CardHeader>
       </Card>
-      <Card></Card>
     </main>
   );
 }

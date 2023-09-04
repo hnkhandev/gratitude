@@ -4,6 +4,7 @@ import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -54,6 +55,7 @@ export function Task() {
                 </div>
                 <CardDescription>Card Description</CardDescription>
               </CardHeader>
+              <CardFooter className="text-yellow-500">Incomplete</CardFooter>
             </Card>
           </motion.li>
         ))}

@@ -20,4 +20,7 @@ export const authConfig: NextAuthOptions = {
   session: {
     strategy: "database",
   },
+  pages: {
+    signIn: "sign-in",
+  },
 };
