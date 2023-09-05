@@ -4,17 +4,19 @@ import { eq } from "drizzle-orm";
 import { sessions, users } from "./schema/schema";
 import { db } from "./lib/db";
 
+const protectedRoutes = ["/dashboard", "/profile"] as const;
+
 export async function middleware(request: NextRequest) {
   let sessionToken = request.cookies.get("next-auth.session-token")?.value;
   const pathname = request.nextUrl.pathname;
-  const isOAuthCallback = pathname.startsWith("/api/auth/callback/");
 
-  if (isOAuthCallback) {
-    return NextResponse.next();
-  }
-
-  if (!sessionToken) {
+  if (
+    !sessionToken &&
+    protectedRoutes.some((path) => pathname.startsWith(path))
+  ) {
     return NextResponse.redirect(new URL("/sign-in", request.url));
+  } else if (!sessionToken) {
+    return NextResponse.next();
   }
 
   const userSession = (
@@ -26,11 +28,22 @@ export async function middleware(request: NextRequest) {
       .limit(1)
   )[0];
 
-  if (!userSession) {
-    return NextResponse.redirect(new URL("/login", request.url));
+  if (
+    !userSession &&
+    protectedRoutes.some((path) => pathname.startsWith(path))
+  ) {
+    return NextResponse.redirect(new URL("/sign-in", request.url));
+  } else if (!userSession) {
+    return NextResponse.next();
+  }
+
+  if (userSession && pathname === "/") {
+    return NextResponse.redirect(new URL("/dashboard", request.url));
   }
 
   return NextResponse.next();
 }
 
-export const config = { matcher: ["/", "/profile"] };
+export const config = {
+  matcher: ["/((?!.*\\..*|_next|api/auth).*)"],
+};
