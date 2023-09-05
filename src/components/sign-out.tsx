@@ -8,7 +8,7 @@ export function SignOut() {
   return (
     <DropdownMenuItem asChild>
       <button
-        className="flex items-center gap-2 w-full"
+        className="flex items-center w-full gap-2"
         onClick={async () => await signOut()}
       >
         <ExitIcon />

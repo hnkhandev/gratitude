@@ -7,7 +7,7 @@ function WhopSignIn() {
   return (
     <Button
       onClick={async () => await signIn("whop")}
-      className="gap-2 text-white bg-whop hover:bg-whop/90"
+      className="text-white gap-2 bg-whop hover:bg-whop/90"
     >
       Sign in with <WhopLogo />
     </Button>

@@ -15,7 +15,7 @@ export default async function SignIn() {
       <Card className="w-full max-w-md">
         <CardHeader className="flex flex-col gap-4">
           <CardTitle className="">Welcome back!</CardTitle>
-          <CardContent className="flex flex-col gap-2 p-0 text-sm">
+          <CardContent className="flex flex-col p-0 text-sm gap-2">
             <div>
               If you&apos;ve bought&nbsp;
               <span className="font-semibold text-primary">Gratitude</span>

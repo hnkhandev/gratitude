@@ -15,16 +15,21 @@ import { Skeleton } from "./ui/skeleton";
 import { PersonIcon } from "@radix-ui/react-icons";
 import { Button } from "./ui/button";
 import { SignOut } from "./sign-out";
+import { GratitudeLogo } from "@/svgs/gratitude-logo";
 
 export async function SiteHeader() {
   const session = await getServerSession(authConfig);
   console.log(session);
 
   return (
-    <header className="top-0 z-10 w-full border-b py-1">
+    <header className="top-0 z-10 w-full py-1 border-b">
       <div className="container flex items-center h-10">
         <div className="flex items-center gap-1 ">
-          <Link href="/" className="font-semibold text-primary">
+          <Link
+            href="/"
+            className="flex items-center gap-1 font-semibold text-primary"
+          >
+            <GratitudeLogo className="w-4 h-4 fill-primary" />
             Gratitude
           </Link>
         </div>
@@ -34,15 +39,15 @@ export async function SiteHeader() {
               <DropdownMenuTrigger asChild>
                 <Button
                   variant="secondary"
-                  className="relative h-9 w-9 rounded-full"
+                  className="relative rounded-full h-9 w-9"
                 >
-                  <Avatar className="h-8 w-8">
+                  <Avatar className="w-8 h-8">
                     <AvatarImage
                       src={session.user.image}
                       alt={session.user.name ?? ""}
                     />
                     <AvatarFallback>
-                      <Skeleton className="h-8 w-8" />
+                      <Skeleton className="w-8 h-8" />
                     </AvatarFallback>
                   </Avatar>
                 </Button>
@@ -51,9 +56,11 @@ export async function SiteHeader() {
                 <DropdownMenuLabel>{session.user.name}</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
-                  <DropdownMenuItem className="flex items-center gap-2">
-                    <PersonIcon />
-                    Profile
+                  <DropdownMenuItem className="flex items-center gap-2" asChild>
+                    <Link href="/profile">
+                      <PersonIcon />
+                      Profile
+                    </Link>
                   </DropdownMenuItem>
                   <SignOut />
                 </DropdownMenuGroup>
