@@ -14,7 +14,7 @@ export function PurchaseMembership({
 }) {
   return (
     <div className="flex flex-col gap-4 pt-8">
-      <h1 className="text-xl">It looks like you don't have membership!</h1>
+      <h1 className="text-xl">It looks like you don&apos;t have membership!</h1>
       <Card className="w-full max-w-md">
         <CardHeader>
           <CardTitle>Zen</CardTitle>
