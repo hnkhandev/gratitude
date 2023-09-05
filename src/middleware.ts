@@ -7,7 +7,9 @@ import { db } from "./lib/db";
 const protectedRoutes = ["/dashboard", "/profile"] as const;
 
 export async function middleware(request: NextRequest) {
-  let sessionToken = request.cookies.get("next-auth.session-token")?.value;
+  let sessionToken = request.cookies.get(
+    process.env.SESSION_TOKEN_NAME!
+  )?.value;
   const pathname = request.nextUrl.pathname;
 
   if (
@@ -36,6 +38,8 @@ export async function middleware(request: NextRequest) {
   } else if (!userSession) {
     return NextResponse.next();
   }
+
+  console.log("pathname is", pathname);
 
   if (userSession && (pathname === "/" || pathname === "/sign-in")) {
     return NextResponse.redirect(new URL("/dashboard", request.url));
