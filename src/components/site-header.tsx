@@ -19,7 +19,6 @@ import { GratitudeLogo } from "@/svgs/gratitude-logo";
 
 export async function SiteHeader() {
   const session = await getServerSession(authConfig);
-  console.log(session);
 
   return (
     <header className="top-0 z-10 w-full py-1 border-b">

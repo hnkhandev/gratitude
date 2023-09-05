@@ -25,7 +25,10 @@ export async function getUserSdk() {
 
   if (!accessToken) return null;
 
-  return new WhopSDK({ TOKEN: accessToken }).userOAuth;
+  return {
+    userSdk: new WhopSDK({ TOKEN: accessToken }).userOAuth,
+    user: session.user,
+  };
 }
 
 export async function findProduct(

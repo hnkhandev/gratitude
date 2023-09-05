@@ -1,19 +1,33 @@
 import { authConfig } from "@/auth/auth-config";
+import { PurchaseMembership } from "@/components/purchase-membership";
 import { RadialTaskBar } from "@/components/radial-task-bar";
 import { Task } from "@/components/task";
 import { findProduct, getUserSdk, productSdk } from "@/lib/whop-sdk";
 import { getServerSession } from "next-auth";
 
 export default async function Home() {
-  const session = await getServerSession(authConfig);
-
-  const userSdk = await getUserSdk();
+  const userInfo = await getUserSdk();
+  const userSdk = userInfo?.userSdk;
 
   let productMembership;
   if (userSdk) {
     productMembership = await findProduct(
       userSdk,
       process.env.NEXT_PUBLIC_REQUIRED_PRODUCT!
+    );
+  }
+
+  let recommendedPlan;
+  if (!productMembership) {
+    recommendedPlan = await productSdk.plans.retrievePlan({
+      id: process.env.NEXT_PUBLIC_RECOMMENDED_PLAN!,
+    });
+  }
+
+  let purchaseMembership;
+  if (recommendedPlan) {
+    purchaseMembership = (
+      <PurchaseMembership recommendedPlan={recommendedPlan} />
     );
   }
 
@@ -25,7 +39,7 @@ export default async function Home() {
           <Task />
         </>
       ) : (
-        <span>Looks like you dont have membership</span>
+        purchaseMembership
       )}
     </main>
   );
