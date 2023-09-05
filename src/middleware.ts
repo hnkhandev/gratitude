@@ -6,6 +6,12 @@ import { db } from "./lib/db";
 
 export async function middleware(request: NextRequest) {
   let sessionToken = request.cookies.get("next-auth.session-token")?.value;
+  const pathname = request.nextUrl.pathname;
+  const isOAuthCallback = pathname.startsWith("/api/auth/callback/");
+
+  if (isOAuthCallback) {
+    return NextResponse.next();
+  }
 
   if (!sessionToken) {
     return NextResponse.redirect(new URL("/sign-in", request.url));
