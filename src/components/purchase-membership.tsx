@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/card";
 import { ArrowRightIcon } from "@radix-ui/react-icons";
 import { Plan } from "@whop-sdk/core";
+
 export function PurchaseMembership({
   recommendedPlan,
 }: {

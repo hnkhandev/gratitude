@@ -19,7 +19,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useState, useTransition } from "react";
+import { useTransition } from "react";
 import { updateTask } from "@/actions/tasks";
 import { cn } from "@/lib/utils";
 
