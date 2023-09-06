@@ -1,11 +1,21 @@
 import { PurchaseMembership } from "@/components/purchase-membership";
 import { RadialTaskBar } from "@/components/radial-task-bar";
-import { Task } from "@/components/task";
+import { Tasks } from "@/components/tasks";
+import { db } from "@/lib/db";
 import { findProduct, getUserSdk, productSdk } from "@/lib/whop-sdk";
+import { tasks, userTasks } from "@/schema/schema";
+import { and, eq } from "drizzle-orm";
+
+export type UserTask = {
+  id: number;
+  description: string;
+  completed: number | null;
+};
 
 export default async function Dashboard() {
   const userInfo = await getUserSdk();
   const userSdk = userInfo?.userSdk;
+  const user = userInfo?.user;
 
   let productMembership;
   if (userSdk) {
@@ -29,16 +39,39 @@ export default async function Dashboard() {
     );
   }
 
+  let usersTasks: UserTask[] = [];
+  if (productMembership && user) {
+    usersTasks = await db
+      .select({
+        id: tasks.id,
+        description: tasks.description,
+        completed: userTasks.isComplete,
+      })
+      .from(tasks)
+      .leftJoin(
+        userTasks,
+        and(eq(userTasks.taskId, tasks.id), eq(userTasks.userId, user.id))
+      )
+      .where(eq(tasks.date, getTodaysDate()))
+      .limit(5);
+  }
+
   return (
     <main className="container flex flex-col items-center flex-1 gap-4 sm:px-0">
-      {productMembership ? (
+      {productMembership && user ? (
         <>
-          <RadialTaskBar />
-          <Task />
+          <RadialTaskBar usersTasks={usersTasks} />
+          <Tasks usersTasks={usersTasks} userId={user?.id} />
         </>
       ) : (
         purchaseMembership
       )}
     </main>
   );
+}
+
+function getTodaysDate() {
+  const today = new Date();
+  today.setUTCHours(0, 0, 0, 0);
+  return today;
 }

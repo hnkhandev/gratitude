@@ -38,11 +38,11 @@ export default async function Profile() {
           <div className="flex flex-col gap-4 text-sm">
             <div className="flex items-center justify-between">
               Username
-              <span>{user?.name}</span>
+              <span className="text-muted-foreground">{user?.name}</span>
             </div>
             <div className="flex items-center justify-between">
               Email
-              <span>{user?.email}</span>
+              <span className="text-muted-foreground">{user?.email}</span>
             </div>
             {
               <div className="flex items-center justify-between">

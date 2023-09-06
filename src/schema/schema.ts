@@ -4,6 +4,8 @@ import {
   mysqlTable,
   primaryKey,
   varchar,
+  date,
+  tinyint,
 } from "drizzle-orm/mysql-core";
 import type { AdapterAccount } from "@auth/core/adapters";
 
@@ -57,3 +59,16 @@ export const verificationTokens = mysqlTable(
     compoundKey: primaryKey(vt.identifier, vt.token),
   })
 );
+
+export const tasks = mysqlTable("task", {
+  id: int("id").autoincrement().primaryKey().notNull(),
+  description: varchar("description", { length: 1000 }).notNull(),
+  date: date("date", { mode: "date" }).notNull(),
+});
+
+export const userTasks = mysqlTable("userTask", {
+  userId: varchar("userId", { length: 255 }).notNull(),
+  taskId: int("taskId").notNull(),
+  dateModified: timestamp("dateModified").defaultNow().notNull(),
+  isComplete: tinyint("isComplete").notNull(),
+});
