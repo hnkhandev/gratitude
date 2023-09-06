@@ -5,8 +5,6 @@ import { Inter } from "next/font/google";
 import { SiteFooter } from "@/components/site-footer";
 import { ThemeProvider } from "../providers/theme-provider";
 
-export const runtime = "edge";
-
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
