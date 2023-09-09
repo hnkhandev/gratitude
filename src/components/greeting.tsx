@@ -1,6 +1,18 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import { Skeleton } from "./ui/skeleton";
+
 export function Greeting() {
+  const [hasMounted, setHasMounted] = useState(false);
+
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+
+  if (!hasMounted) {
+    return <Skeleton className="h-[2ch] w-[10ch]" />;
+  }
   return <span className="text-sm">{getGreeting()}</span>;
 }
 
