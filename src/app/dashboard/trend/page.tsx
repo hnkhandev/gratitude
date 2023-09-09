@@ -60,7 +60,7 @@ export default async function Trend() {
             </CardContent>
           ) : (
             <CardContent className="text-sm">
-              Looks like you don't have any data.
+              Looks like you don&apos;t have any data.
             </CardContent>
           )}
         </Card>
