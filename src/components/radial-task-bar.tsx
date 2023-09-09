@@ -8,7 +8,7 @@ export function RadialTaskBar({ usersTasks }: { usersTasks: UserTask[] }) {
   const tasksCompleted = usersTasks.filter((task) => task.completed).length;
 
   return (
-    <div className="relative w-full max-w-md h-52">
+    <div className="relative h-52">
       <svg
         className="absolute top-0 left-0 w-full h-full"
         viewBox="0 0 120 120"

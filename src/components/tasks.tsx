@@ -2,7 +2,7 @@
 
 import {
   Card,
-  CardDescription,
+  CardContent,
   CardFooter,
   CardHeader,
   CardTitle,
@@ -33,7 +33,7 @@ export function Tasks({
   const [isPending, startTransition] = useTransition();
 
   return (
-    <ul className="flex flex-col w-full max-w-md gap-4">
+    <ul className="flex flex-col gap-4">
       <AnimatePresence>
         {usersTasks.map((task, index) => (
           <motion.li
@@ -52,7 +52,6 @@ export function Tasks({
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <CardTitle>Task #{index + 1}</CardTitle>
-
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                       <Button variant="ghost" className="h-auto p-2">
@@ -85,15 +84,16 @@ export function Tasks({
                     </DropdownMenuContent>
                   </DropdownMenu>
                 </div>
-                <CardDescription>{task.description}</CardDescription>
               </CardHeader>
-
+              <CardContent className="text-muted-foreground">
+                {task.description}
+              </CardContent>
               <CardFooter
                 className={cn(
                   task.completed ? "text-green-500" : "text-yellow-500"
                 )}
               >
-                {task.completed ? "Completed" : "Incomplete"}
+                {task.completed ? "Complete" : "Incomplete"}
               </CardFooter>
             </Card>
           </motion.li>

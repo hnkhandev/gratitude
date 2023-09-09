@@ -44,18 +44,16 @@ export default async function Profile() {
               Email
               <span className="text-muted-foreground">{user?.email}</span>
             </div>
-            {
-              <div className="flex items-center justify-between">
-                Membership status
-                {productMembership?.status ? (
-                  <Badge className="text-white bg-yellow-500 hover:bg-yellow-500/80">
-                    {productMembership?.status}
-                  </Badge>
-                ) : (
-                  <Badge variant={"destructive"}>Not subscribed</Badge>
-                )}
-              </div>
-            }
+            <div className="flex items-center justify-between">
+              Membership status
+              {productMembership?.status ? (
+                <Badge className="text-white bg-yellow-500 hover:bg-yellow-500/80">
+                  {productMembership?.status}
+                </Badge>
+              ) : (
+                <Badge variant={"destructive"}>Not subscribed</Badge>
+              )}
+            </div>
             {productMembership?.renewal_period_end && (
               <div className="flex items-center justify-between">
                 Renewal in
@@ -86,7 +84,6 @@ export default async function Profile() {
                 )} ${currentPlan.base_currency?.toUpperCase()} every ${
                   currentPlan.billing_period
                 } days`}
-
                 <a
                   href={currentPlan.direct_link}
                   target="_blank"

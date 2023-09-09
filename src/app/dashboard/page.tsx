@@ -1,3 +1,4 @@
+import { ActionBar } from "@/components/action-bar";
 import { PurchaseMembership } from "@/components/purchase-membership";
 import { RadialTaskBar } from "@/components/radial-task-bar";
 import { Tasks } from "@/components/tasks";
@@ -59,10 +60,11 @@ export default async function Dashboard() {
   return (
     <main className="container flex flex-col items-center flex-1 gap-4 sm:px-0">
       {productMembership && user ? (
-        <>
+        <div className="flex flex-col w-full max-w-md gap-4">
           <RadialTaskBar usersTasks={usersTasks} />
+          <ActionBar />
           <Tasks usersTasks={usersTasks} userId={user?.id} />
-        </>
+        </div>
       ) : (
         purchaseMembership
       )}
